@@ -24,7 +24,7 @@ new Vue({
 
         var self = this;
         jQuery.ajax({
-            url: window.location.origin+'/atm/base/buildurl',
+            url: window.location.origin+'/base/buildurl',
             type: 'GET',
             success: function (result) {
                 self.base_url=result;
@@ -41,10 +41,10 @@ new Vue({
             console.log("In download statement");
             var self = this;
             jQuery.ajax({
-                url: window.location.origin+'/atm/transaction/download?name=statement',
+                url: window.location.origin+'/transaction/download?name=statement',
                 type: 'GET',
                 success: function (result) {
-                    window.location=window.location.origin+'/atm/transaction/download?name=statement'
+                    window.location=window.location.origin+'/transaction/download?name=statement'
                 },
                 failure: function (errMsg) {
                     console.log("error")
@@ -56,7 +56,7 @@ new Vue({
             console.log("In savings statement");
             var self = this;
             jQuery.ajax({
-                url: window.location.origin+'/atm/transaction/getbalence',
+                url: window.location.origin+'/transaction/getbalence',
                 type: 'GET',
                 success: function (result) {
                     self.account_savings=result;
@@ -72,7 +72,7 @@ new Vue({
             console.log("In logout")
             var self = this;
             jQuery.ajax({
-                url: window.location.origin+'/atm/accounts/logout',
+                url: window.location.origin+'/accounts/logout',
                 type: 'GET',
                 success: function (result) {
                     if(result == 'true'){
@@ -102,7 +102,7 @@ new Vue({
             var self = this;
             jQuery.ajax({
                 data: {'old-password' :this.old_pin, 'new-password':this.new_pin, 'new-repassword':this.re_pin },
-                url: window.location.origin+'/atm/accounts/submit/changepin',
+                url: window.location.origin+'/accounts/submit/changepin',
                 type: 'POST',
                 success: function (result) {
                     console.log(result)
@@ -127,7 +127,7 @@ new Vue({
             var self = this;
             jQuery.ajax({
                 data: {'acc-number' :this.acc_number, 'pin':this.pin },
-                url: window.location.origin+'/atm/accounts/submit/login',
+                url: window.location.origin+'/accounts/submit/login',
                 type: 'POST',
                 success: function (result) {
                     if(result == "true"){
@@ -150,11 +150,11 @@ new Vue({
         cashWithdraw(withdrawAmount){
             jQuery.ajax({
                 data: {'amount' :withdrawAmount },
-                url: window.location.origin+'/atm/transaction/submit/dashboard',
+                url: window.location.origin+'/transaction/submit/dashboard',
                 type: 'POST',
                 success: function (result) {
                     console.log(result)
-                    window.location=window.location.origin+"/atm/transaction/download?name=receipt";
+                    window.location=window.location.origin+"/transaction/download?name=receipt";
                 },
                 failure: function (errMsg) {
                     console.log("error")
