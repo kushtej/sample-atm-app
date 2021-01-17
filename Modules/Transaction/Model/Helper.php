@@ -74,11 +74,11 @@ class Helper
         $table = $this->getBalence($name);
         $accNo = $_SESSION['acc_number'];
         $accHolderName = $_SESSION['first_name'];
-        // $file = $_SERVER['DOCUMENT_ROOT']  ."/atm/app/downloads/".$name.".txt";
-        $helper = new  \Modules\Base\Model\Helper();
-        $baseURL = $helper->buildUrl();
+        $file = $_SERVER['DOCUMENT_ROOT']  ."/app/downloads/".$name.".txt";
+        // $helper = new  \Modules\Base\Model\Helper();
+        // $baseURL = $helper->buildUrl();
         
-        $file = $baseURL+"app/downloads/".$name.".txt";
+        // $file = $baseURL+"app/downloads/".$name.".txt";
 
 
         $txt = fopen($file, "w") or die("Unable to open file!");
