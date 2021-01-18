@@ -13,7 +13,7 @@ class Dashboard
             } 
             else
             {
-                echo "Insufficient Account Balence";
+                echo "false";
             }
          }
          else{

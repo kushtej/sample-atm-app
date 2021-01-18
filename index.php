@@ -23,12 +23,7 @@ function router()
 
     switch ($request)
     {         
-        
-        case preg_match('/.*base.*/', $request)? $request : !$request:
-            $baseController = new Modules\Base\Index();
-            $baseController->router($request,$rootpath);
-            break;
-        
+          
         case "$rootpath/":
         case preg_match('/.*accounts.*/', $request)? $request : !$request:
             $loginController = new Modules\Accounts\Index();
@@ -41,7 +36,7 @@ function router()
             break;
         
         default:
-            echo "404";
+            echo "404 Page Not Found";
             break;  
     }
 }

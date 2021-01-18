@@ -12,10 +12,6 @@ class Index
                 break;
 
             case "$rootpath/transaction/download?name=statement":
-                $dashboardController = new \Modules\Base\Controller\Auth();
-                $downloadReceptController = new Controller\Dashboard();
-                $downloadReceptController->getReceipt();
-                break;
             case "$rootpath/transaction/download?name=receipt":
                 $dashboardController = new \Modules\Base\Controller\Auth();
                 $downloadReceptController = new Controller\Dashboard();

@@ -3,11 +3,7 @@ namespace Modules\Transaction\Model;
 
 class Helper
 {
-    
 
-    
-    
-    
     public function getBalence($name=null)
     {
         $accNo = $_SESSION['acc_number'];
@@ -73,14 +69,8 @@ class Helper
     {
         $table = $this->getBalence($name);
         $accNo = $_SESSION['acc_number'];
-        $accHolderName = $_SESSION['first_name'];
+        $accHolderName = $_SESSION['first_name']." ".$_SESSION['last_name'];
         $file = $_SERVER['DOCUMENT_ROOT']  ."/app/downloads/".$name.".txt";
-        // $helper = new  \Modules\Base\Model\Helper();
-        // $baseURL = $helper->buildUrl();
-        
-        // $file = $baseURL+"app/downloads/".$name.".txt";
-
-
         $txt = fopen($file, "w") or die("Unable to open file!");
         fwrite($txt, "Account Number = ".$accNo."\n");
         fwrite($txt, "Account Name = ".$accHolderName."\n");
