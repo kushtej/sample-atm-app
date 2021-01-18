@@ -24,7 +24,6 @@ new Vue({
     methods:{
 
         downloadStatement(){
-            console.log("In download statement");
             var self = this;
             jQuery.ajax({
                 url: this.base_url+'/transaction/download?name=statement',
@@ -33,29 +32,24 @@ new Vue({
                     window.location=window.location.origin+"/transaction/download?name=statement";
                 },
                 failure: function (errMsg) {
-                    console.log("error")
                 }
             })
         },
 
         saving(){
-            console.log("In savings statement");
             var self = this;
             jQuery.ajax({
                 url: this.base_url+'/transaction/getbalence',
                 type: 'GET',
                 success: function (result) {
                     self.account_savings=result;
-                    console.log(result)
                 },
                 failure: function (errMsg) {
-                    console.log("error")
                 }
             })
         },
     
         logout(){
-            console.log("In logout")
             var self = this;
             jQuery.ajax({
                 url: this.base_url+'/accounts/logout',
@@ -67,7 +61,6 @@ new Vue({
                     }
                 },
                 failure: function (errMsg) {
-                    console.log("error")
                 }
             })
         },
@@ -91,7 +84,6 @@ new Vue({
                 url: this.base_url+'/accounts/submit/changepin',
                 type: 'POST',
                 success: function (result) {
-                    console.log(result)
                     if(result == "true"){
                         self.error=true;
                 self.error_msg="Pin successfully changed"; 
@@ -104,7 +96,6 @@ new Vue({
                    
                 },
                 failure: function (errMsg) {
-                    console.log(errMsg)   
                 }
             })
 
@@ -122,13 +113,11 @@ new Vue({
                         self.buttonshow = true;
                         self.login=false;                     
                     }else{
-                        console.log(result)
                         self.error_msg=result;
                         self.error = true;
                     }
                 },
                 failure: function (errMsg) {
-                    console.log(errMsg)   
                 }
             })
             
@@ -149,7 +138,6 @@ new Vue({
                     window.location=window.location.origin+"/transaction/download?name=receipt";
                 },
                 failure: function (errMsg) {
-                    console.log("error")
                 }
             })
         }
