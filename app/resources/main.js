@@ -151,7 +151,7 @@ new Vue({
             <label for="AccountNumber"><b>Account Number</b></label>
             <input type="text" name="acc-number" v-model="acc_number" placeholder="Enter Account Number"  oninput="this.value = this.value.replace(/[^0-9.]/g, '')" name="email" required>
             <label for="pin"><b>Pin</b></label>
-            <input type="text" v-model="pin" name="pin" placeholder="Enter password" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"  required>
+            <input type="password" v-model="pin" name="pin" placeholder="Enter password" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"  required>
             <button class="button"  type="submit" value="submit" @click="auhthenticate">Submit</button>
             <span v-show ="error">{{error_msg}}</span>
         </form>
