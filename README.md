@@ -78,10 +78,10 @@ Go to your Terminal and type-in
 ```
 Enter your DBusername and DBPassword
 
-### Step 1 — Change your `DBconnection.php`
+### Step 2 — Change your `DBconnection.php`
 
 Go to `sample-atm-app/Modules/Base/Model/Dbconnection.php` and change to your dbservername,username,dbpassword and dbname.
 
-### Step 2— Go to Browser 
+### Step 3— Go to Browser 
 Go to Browser and type -in `127.0.0.1/YOUR-APP-NAME`
 
