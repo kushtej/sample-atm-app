@@ -69,6 +69,15 @@ Save the file and exit.
 
 ## Running the App :
 
+### Step 1 — Setup MySQL Database
+
+Go to your Terminal and type-in 
+
+```
+./Database/db_exec.sh
+```
+Enter your DBusername and DBPassword
+
 ### Step 1 — Change your `DBconnection.php`
 
 Go to `sample-atm-app/Modules/Base/Model/Dbconnection.php` and change to your dbservername,username,dbpassword and dbname.
