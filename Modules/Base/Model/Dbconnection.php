@@ -7,10 +7,6 @@ class Dbconnection {
     public static $conn = false;
 
     public static function connect(){
-      // $serverName = "localhost";
-      // $dbUserName = "root";
-      // $dbPassword = "Kush007_tej";
-      // $dbName = "atm";
       $serverName = "sql12.freemysqlhosting.net";
       $dbUserName = "sql12386553";
       $dbPassword = "bxEPaZwjRP";

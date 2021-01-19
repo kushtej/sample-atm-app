@@ -16,8 +16,7 @@ class Dashboard
                 echo "false";
             }
          }
-         else{
-         }
+
     }
     
 

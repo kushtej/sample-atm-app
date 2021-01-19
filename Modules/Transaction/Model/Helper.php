@@ -89,8 +89,7 @@ class Helper
         header('Content-Length: ' . filesize($file));
         header("Content-Type: text/plain");
         readfile($file);
-        exit();
-        
+        exit();  
     }
 
 

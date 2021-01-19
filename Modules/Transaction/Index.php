@@ -23,7 +23,6 @@ class Index
                 $dashboardController = new Controller\Dashboard();
                 $dashboardController->Balence();
                 break;
-    
         }
     }
 }

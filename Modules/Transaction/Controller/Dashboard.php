@@ -11,18 +11,11 @@ class Dashboard
 
             $isValidTransaction = $helper->download(($_GET["name"]));
             if($isValidTransaction == true)
-            {
-            //  header("Location: ". $helper->buildUrl(). "/dashboard"); 
-            echo "download completed";
+            {            
+                echo "download completed";
             } 
-            else
-            {
-            //  header("Location: ". $helper->buildUrl(). "/dashboard"); 
-            }
          }
-         else{
-            //  header("Location: ". $helper->buildUrl(). "/"); 
-         }
+
     }
 
     public function Balence(){

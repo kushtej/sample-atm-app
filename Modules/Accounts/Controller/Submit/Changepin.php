@@ -13,21 +13,15 @@ class Changepin
                 echo "pin does not match";
                 return;
             }
-
            $isSavedPassword = $helper->changepassword(($_POST["old-password"]),($_POST["new-password"]));
            if($isSavedPassword)
            {
-                // header("Location: ". $helper->buildUrl(). "/dashboard"); 
+                
                 echo "true";
-           } 
-           else 
-           {
-                // header("Location: ". $helper->buildUrl(). "/"); 
-           }           
+           }            
         } 
         else 
         {
-            // header("Location: ". $helper->buildUrl(). "/signup"); 
             echo "enter pin";
         }
     }
