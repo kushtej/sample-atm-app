@@ -115,7 +115,7 @@ display: block;
 
 
 }
-span{
+span,pre{
     color: red;
     text-align: center;
 }

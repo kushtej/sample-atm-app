@@ -1,12 +1,12 @@
-Account Number = 1234567890
-Account Name = John
+Account Number = 4567890123
+Account Name = Test User-4
 
 
 
-transaction_id		6
-acc_number		1234567890
-initail_balence		2000
-transaction_amt		2000
-current_balence		0
+transaction_id		23
+acc_number		4567890123
+initail_balence		20000
+transaction_amt		50
+current_balence		19950
 transaction_statement		Withdraw
-created_at		2021-01-18 20:50:22
+created_at		2021-01-21 18:21:55

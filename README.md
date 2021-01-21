@@ -1,10 +1,9 @@
 # ATM Simulation using VUE.JS
 
-![atm](preview.gif?raw=true " ")
-
-
 A MVC Design pattern App using Vue.js and PHP to imitate the simulation of an ATM.
-
+```
+Requirements : php version : 7.4
+```
 ## Installation of  Apache2 `mod_rewrite` in Linux 20.04:
 
 ### Step 1 — Enabling mod_rewrite

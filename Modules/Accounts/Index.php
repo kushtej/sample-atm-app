@@ -1,9 +1,9 @@
 <?php
 namespace Modules\Accounts; 
-
 class Index 
 {
     public function router($request,$rootpath) {
+        $accountsController = new Controller\Submit\Accounts();
         switch ($request)
         {      
             case "$rootpath/":
@@ -13,18 +13,15 @@ class Index
                 break;
 
             case "$rootpath/accounts/submit/login":
-                $loginController = new Controller\Submit\Login();
+                $accountsController->login();
                 break;
             
             case "$rootpath/accounts/submit/changepin":
-                $dashboardController = new \Modules\Base\Controller\Auth();
-                $changepinController = new Controller\Submit\Changepin();
+                $accountsController->changepin();
                 break;
             
-            case "$rootpath/accounts/logout":
-                $dashboardController = new \Modules\Base\Controller\Auth();
-                $logoutController = new Controller\Login();
-                $logoutController->logout();    
+            case "$rootpath/accounts/logout":   
+                $accountsController->logout();
                 break;
         }
     }

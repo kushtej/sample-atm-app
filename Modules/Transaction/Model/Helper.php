@@ -1,18 +1,23 @@
 <?php
 namespace Modules\Transaction\Model;
+use Modules\Base\Model\BaseHelper as BaseHelper;
 
-class Helper
+class Helper extends BaseHelper
 {
 
     public function getBalence($name=null)
     {
-        $accNo = $_SESSION['acc_number'];
-        $sql = "SELECT * FROM transaction where acc_number='$accNo' ORDER BY created_at DESC";
-        
+
         $Helper = new \Modules\Base\Model\Dbconnection();
-        $conn = $Helper->init();
-                
-        if ($result = mysqli_query($conn, $sql))
+        $conn = $Helper::getInstance();
+
+        $accNo = $_SESSION['acc_number'];
+        $sql = "SELECT * FROM transaction where acc_number= ? ORDER BY created_at DESC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $accNo); 
+        $stmt->execute();
+        if ($result = $stmt->get_result())
         {
             if($name == 'statement'){
                 $table = array();
@@ -34,33 +39,113 @@ class Helper
                 return $balence;
             }  
         }
-
     }
 
-    public function withdrawAmt($withdrawAmt)
+    
+    public function processBills($output,$conn,$withdrawAmt)
     {
-        $prevBalence = $this->getBalence();
-        $withdrawAmt = (int)$withdrawAmt;
-        $currentBalence = $prevBalence - $withdrawAmt;
-        if($currentBalence<0){
-            return false;
+        $message = '';
+
+        $bills = $this->getBills($conn);
+        $totalAtmCash = 0;
+        $dinominations = array_keys($bills);
+
+        foreach($bills as $k=>$v){
+            $totalAtmCash += ($k * $v);
         }
-        $accNo = $_SESSION['acc_number'];
-        $_SESSION['balence']=$currentBalence;
 
-        $sql = "INSERT INTO transaction(acc_number,initail_balence,transaction_amt,current_balence,transaction_statement) values ('$accNo','$prevBalence','$withdrawAmt','$currentBalence','Withdraw')";
+        $payment = $withdrawAmt;
 
-        $Helper = new \Modules\Base\Model\Dbconnection();
-        $conn = $Helper->init();
-
-
-        if ($conn->query($sql) === true)
-        {
-            return true;
+        if($payment <= $totalAtmCash){
+            rsort($dinominations);
+            $itemsOfEach = array();
+        
+            foreach ($dinominations as $unit){
+                $result = intval($payment / $unit);
+                if($bills[$unit] >= $result)
+                {
+                    $itemsOfEach[$unit] = $result;
+                    $payment %= $unit;
+                }
+                else
+                {
+                    $itemsOfEach[$unit] = $bills[$unit];
+                    $payment -= ($bills[$unit] * $unit);
+                }
+            }
+        
+            if($payment > 0)
+            {
+                $message = "Correct currency note are not available.";
+                $output['status'] = false;
+                $output['message'] = $message;
+                return $output;
+            }
+            else
+            {
+                $message .="The ATM Dispensed\n";
+                foreach($itemsOfEach as $key=>$value)
+                {	
+                    $bills[$key] = $bills[$key] - $value; 
+                    if($value!=0){
+                        $message .= "\n$".$key." bills : ".$value." notes";
+                    }
+                }
+                $totalAtmCash = $totalAtmCash-$withdrawAmt;
+            }
         }
         else
         {
-            return false;
+            $output['status'] = false;
+            $output['message'] = "Not enough currency in ATM.";
+            return $output;
+        } 
+
+        $this->updateBills($bills,$conn);
+        $output['status'] = true;
+        $output['message'] = $message;
+        return $output;
+    }
+    
+    
+    
+    public function withdrawAmt($withdrawAmt)
+    {   
+        $accNo = $_SESSION['acc_number'];
+        $output = array();
+
+        $Helper = new \Modules\Base\Model\Dbconnection();
+        $conn = $Helper::getInstance();
+        
+        $prevBalence = $this->getBalence();
+        $withdrawAmt = (int)$withdrawAmt;
+        $currentBalence = $prevBalence - $withdrawAmt;
+
+        if($currentBalence<0){
+            $output['status'] = false;
+            $output['message'] ="Insufficient balence in your account";
+            return $output;
+        }
+
+        $output = $this->processBills($output,$conn,$withdrawAmt);
+        if($output['status'] === false){
+            return $output;
+        }
+
+
+        $sql = "INSERT INTO transaction(acc_number,initail_balence,transaction_amt,current_balence,transaction_statement) values (?,?,?,?,'Withdraw')";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ssss', $accNo,$prevBalence,$withdrawAmt,$currentBalence);
+
+        if ($stmt->execute()===true)
+        {            
+            return $output;
+        }
+        else
+        {
+            $output['status'] = false;
+            $output['message'] = 'query didnt execute!Something went wrong';
+            return $output;        
         }
     }
 

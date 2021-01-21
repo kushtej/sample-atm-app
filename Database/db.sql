@@ -1,8 +1,7 @@
-USE sql12386553;
 
--- DROP DATABASE IF EXISTS atm;
--- CREATE DATABASE atm;
--- USE atm;
+DROP DATABASE IF EXISTS atm;
+CREATE DATABASE atm;
+USE atm;
 
 
 CREATE TABLE user
@@ -44,13 +43,27 @@ CREATE TABLE transaction
 
 INSERT INTO transaction (acc_number,initail_balence,transaction_amt,current_balence,transaction_statement)
 		VALUES
-			(1234567890,0,10000,10000,'Deposit'),
-			(2345678901,0,10000,10000,'Deposit'),
-			(3456789012,0,10000,10000,'Deposit'),
-			(4567890123,0,10000,10000,'Deposit'),
-			(5678901234,0,10000,10000,'Deposit'),
-			(6789012345,0,10000,10000,'Deposit'),
-			(7890123456,0,10000,10000,'Deposit'),
-			(8901234567,0,10000,10000,'Deposit'),
-			(9012345678,0,10000,10000,'Deposit'),
-			(0123456789,0,10000,10000,'Deposit');
+			(1234567890,0,20000,20000,'Deposit'),
+			(2345678901,0,20000,20000,'Deposit'),
+			(3456789012,0,20000,20000,'Deposit'),
+			(4567890123,0,20000,20000,'Deposit'),
+			(5678901234,0,20000,20000,'Deposit'),
+			(6789012345,0,20000,20000,'Deposit'),
+			(7890123456,0,20000,20000,'Deposit'),
+			(8901234567,0,20000,20000,'Deposit'),
+			(9012345678,0,20000,20000,'Deposit'),
+			(0123456789,0,20000,20000,'Deposit');
+
+CREATE TABLE bills
+(
+	id INT auto_increment primary key,
+	2000s INT DEFAULT 0,1000s INT DEFAULT 0,500s INT DEFAULT 0,
+	200s INT DEFAULT 0,100s INT DEFAULT 0,50s INT DEFAULT 0,
+	20s INT DEFAULT 0,10s INT DEFAULT 0,5s INT DEFAULT 0,
+	foreign key(id) references transaction(transaction_id) on delete cascade	 
+);
+
+
+INSERT INTO bills 
+	VALUES
+		(1,10,10,10,10,10,10,10,10,10);
