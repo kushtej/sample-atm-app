@@ -7,10 +7,10 @@ class Dbconnection {
     public static $conn = false;
 
     public static function connect(){
-      $serverName = "sql12.freemysqlhosting.net";
-      $dbUserName = "sql12386553";
-      $dbPassword = "bxEPaZwjRP";
-      $dbName = "sql12386553";
+      $serverName = "";
+      $dbUserName = "";
+      $dbPassword = "";
+      $dbName = "";
       $conn = mysqli_connect($serverName, $dbUserName, $dbPassword, $dbName);
       if ($conn->connect_error){
           return false;

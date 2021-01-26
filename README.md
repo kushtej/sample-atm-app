@@ -1,6 +1,7 @@
 # ATM Simulation using VUE.JS
 
 A MVC Design pattern App using Vue.js and PHP to imitate the simulation of an ATM.
+![VueATMApp](preview.gif?raw=true " ")
 ```
 Requirements : php version : 7.4
 ```
